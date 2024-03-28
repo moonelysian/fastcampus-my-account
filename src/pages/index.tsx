@@ -2,6 +2,7 @@ import styled from '@emotion/styled'
 import { css } from '@emotion/react'
 import dynamic from 'next/dynamic'
 import Skeleton from '@components/shared/Skeleton'
+import Account from '@components/home/Account'
 
 const EventBanners = dynamic(() => import('@/components/home/EventBanners'), {
   ssr: false,
@@ -12,14 +13,9 @@ const EventBanners = dynamic(() => import('@/components/home/EventBanners'), {
 
 export default function Home() {
   return (
-    <Container>
+    <>
       <EventBanners />
-    </Container>
+      <Account />
+    </>
   )
 }
-
-const Container = styled.div``
-
-const bold = css`
-  font-weight: bold;
-`
