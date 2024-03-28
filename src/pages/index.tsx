@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic'
 import Account from '@components/home/Account'
+import CreditScore from '@components/home/CreditScore'
 import { BannerSkeleton } from '@components/home/EventBanners'
 
 const EventBanners = dynamic(() => import('@components/home/EventBanners'), {
@@ -12,6 +13,7 @@ export default function Home() {
     <>
       <EventBanners />
       <Account />
+      <CreditScore />
     </>
   )
 }
