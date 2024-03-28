@@ -5,7 +5,7 @@ import { store } from '@remote/firebase'
 import { EVENT_BANNERS } from '@/mock/banner'
 import { COLLECTIONS } from '@constants/collection'
 
-const EventBannerAddButton = () => {
+function EventBannerAddButton() {
   const handleButtonClick = async () => {
     const batch = writeBatch(store)
 
