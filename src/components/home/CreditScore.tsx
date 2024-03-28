@@ -1,5 +1,5 @@
+import { useRouter } from 'next/router'
 import CreditScoreChart from '@shared/CreditScoreChart'
-
 import Flex from '@shared/Flex'
 import Text from '@shared/Text'
 import Button from '@shared/Button'
@@ -8,6 +8,7 @@ import Skeleton from '@shared/Skeleton'
 import useCredit from '@components/credit/hooks/useCredit'
 
 function CreditScore() {
+  const navigate = useRouter()
   const { data, isLoading } = useCredit()
 
   if (isLoading) {
@@ -23,7 +24,9 @@ function CreditScore() {
             점수를 올리세요
           </Text>
           <Spacing size={8} />
-          <Button>내 신용점수 보러가기</Button>
+          <Button onClick={() => navigate.push('/credit')}>
+            내 신용점수 보러가기
+          </Button>
         </Flex>
         <CreditScoreChart
           width={80}
