@@ -14,7 +14,7 @@ function CardList() {
   const { data } = useCards()
   const navigate = useRouter()
 
-  const isShowMoreButton = data?.items.length ?? 0 > 5
+  const isShowMoreButton = data?.items?.length ?? 0 > 5
 
   return (
     <div style={{ padding: '24px 0' }}>
@@ -25,7 +25,7 @@ function CardList() {
         추천 카드
       </Text>
       <ul>
-        {data?.items.slice(0, 5).map((card, index) => (
+        {data?.items?.slice(0, 5).map((card, index) => (
           <ListRow
             key={card.id}
             contents={
