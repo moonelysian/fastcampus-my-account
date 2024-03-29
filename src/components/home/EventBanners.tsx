@@ -7,6 +7,7 @@ import withSusepnse from '@hooks/withSuspense'
 import Flex from '@shared/Flex'
 import Text from '@shared/Text'
 import Skeleton from '@shared/Skeleton'
+import ErrorBoundary from '@shared/ErrorBoundary'
 
 import useEventBanners from './hooks/useEventBanners'
 
@@ -46,6 +47,13 @@ const bannerStyles = css`
   padding: 24px;
   border-radius: 8px;
 `
+function WrapErrorBoundary() {
+  return (
+    <ErrorBoundary fallbackComponent={<></>}>
+      <EventBanners />
+    </ErrorBoundary>
+  )
+}
 
 export function BannerSkeleton() {
   return (
@@ -55,6 +63,6 @@ export function BannerSkeleton() {
   )
 }
 
-export default withSusepnse(EventBanners, {
+export default withSusepnse(WrapErrorBoundary, {
   fallback: <BannerSkeleton />,
 })

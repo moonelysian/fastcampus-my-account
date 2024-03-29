@@ -2,12 +2,14 @@ import type { AppProps } from 'next/app'
 import { Global } from '@emotion/react'
 import { QueryClientProvider, QueryClient, Hydrate } from 'react-query'
 import { SessionProvider } from 'next-auth/react'
+import { useReportWebVitals } from 'next/web-vitals'
 
 import globalSteyls from '@styles/globalStyles'
 import Layout from '@shared/Layout'
 import AuthGuard from '@shared/auth/AuthGuard'
 import Navbar from '@shared/Navbar'
 import { AlertContextProvider } from '@contexts/AlertContext'
+import ErrorBoundary from '@shared/ErrorBoundary'
 
 const client = new QueryClient({})
 
@@ -15,7 +17,9 @@ export default function App({
   Component,
   pageProps: { dehydratedState, session, ...pageProps },
 }: AppProps) {
-  console.log('_app')
+  useReportWebVitals((metric) => {
+    console.log(metric)
+  })
 
   return (
     <Layout>
@@ -23,12 +27,14 @@ export default function App({
       <SessionProvider session={session}>
         <QueryClientProvider client={client}>
           <Hydrate state={dehydratedState}>
-            <AlertContextProvider>
-              <AuthGuard>
-                <Navbar />
-                <Component {...pageProps} />
-              </AuthGuard>
-            </AlertContextProvider>
+            <ErrorBoundary>
+              <AlertContextProvider>
+                <AuthGuard>
+                  <Navbar />
+                  <Component {...pageProps} />
+                </AuthGuard>
+              </AlertContextProvider>
+            </ErrorBoundary>
           </Hydrate>
         </QueryClientProvider>
       </SessionProvider>
